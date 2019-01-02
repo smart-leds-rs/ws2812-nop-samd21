@@ -17,6 +17,8 @@ circuit_playground_express = { git = "https://github.com/atsamd-rs/atsamd" }
 cortex-m-rt = "0.5"
 cortex-m = "0.5"
 panic-abort = "0.2"
+smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}
+
 
 [features]
 # ask the HAL to enable atsamd21g18a support
