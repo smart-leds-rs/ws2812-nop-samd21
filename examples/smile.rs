@@ -12,7 +12,7 @@ extern crate panic_abort;
 extern crate ws2812_nop_samd21;
 
 use circuit_playground_express::clock::GenericClockController;
-use circuit_playground_express::{CorePeripherals, Peripherals};
+use circuit_playground_express::{Peripherals};
 
 use ws2812_nop_samd21::Ws2812;
 use smart_leds_trait::SmartLedsWrite;
@@ -22,9 +22,8 @@ entry!(main);
 
 fn main() -> ! {
     let mut peripherals = Peripherals::take().unwrap();
-    let core = CorePeripherals::take().unwrap();
      
-    let mut clocks = GenericClockController::with_internal_32kosc(
+    let _clocks = GenericClockController::with_internal_32kosc(
         peripherals.GCLK,
         &mut peripherals.PM,
         &mut peripherals.SYSCTRL,
@@ -38,6 +37,6 @@ fn main() -> ! {
     let yellow = Color {r: 0x01, g: 0x01, b: 0x00};
     let off = Color {r: 0x00, g: 0x00, b: 0x00};
     let smile = [yellow, off, yellow, yellow, yellow, yellow, yellow, yellow, off, yellow];  
-    neopixel.write(smile.iter().cloned());
+    neopixel.write(smile.iter().cloned()).unwrap();
     loop {}
 }
