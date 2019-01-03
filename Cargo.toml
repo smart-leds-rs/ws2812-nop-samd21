@@ -16,7 +16,7 @@ atsamd21-hal = "0.2"
 circuit_playground_express = { git = "https://github.com/atsamd-rs/atsamd" }
 cortex-m-rt = "0.5"
 cortex-m = "0.5"
-panic-abort = "0.2"
+panic-halt = "0.2"
 smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}
 
 

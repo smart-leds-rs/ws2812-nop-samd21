@@ -8,7 +8,7 @@ extern crate circuit_playground_express;
 extern crate cortex_m_rt;
 extern crate cortex_m;
 
-extern crate panic_abort;
+extern crate panic_halt;
 extern crate ws2812_nop_samd21;
 
 use circuit_playground_express::clock::GenericClockController;
