@@ -8,7 +8,7 @@ pub struct Ws2812<P: OutputPin> {
     pin: P,
 }
 
-impl <P: OutputPin> Ws2812<P> {
+impl<P: OutputPin> Ws2812<P> {
     pub fn new(pin: P) -> Ws2812<P> {
         Ws2812 { pin: pin }
     }
@@ -16,17 +16,15 @@ impl <P: OutputPin> Ws2812<P> {
         let mut bitmask: u8 = 0x80;
         while bitmask != 0 {
             self.pin.set_high();
-            unsafe{ 
+            unsafe {
                 asm!("nop; nop;");
             }
             if data & bitmask != 0 {
-                unsafe{ 
-                    asm!("nop; nop; nop; nop; nop; nop; nop;")
-                }
+                unsafe { asm!("nop; nop; nop; nop; nop; nop; nop;") }
                 self.pin.set_low();
             } else {
                 self.pin.set_low();
-                unsafe{ 
+                unsafe {
                     asm!("nop; nop;");
                 }
             }
@@ -39,7 +37,7 @@ impl <P: OutputPin> Ws2812<P> {
 }
 
 impl<P> SmartLedsWrite for Ws2812<P>
-where 
+where
     P: OutputPin,
 {
     type Error = ();
@@ -48,9 +46,9 @@ where
         T: Iterator<Item = Color>,
     {
         for item in iterator {
-           self.write_byte(item.g);
-           self.write_byte(item.r);
-           self.write_byte(item.b);
+            self.write_byte(item.g);
+            self.write_byte(item.r);
+            self.write_byte(item.b);
         }
         Ok(())
     }

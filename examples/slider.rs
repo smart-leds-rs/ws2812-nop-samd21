@@ -1,4 +1,3 @@
-#![feature(asm)]
 #![no_std]
 #![no_main]
 
@@ -7,22 +6,24 @@ extern crate cortex_m_rt;
 extern crate cortex_m;
 
 extern crate panic_halt;
-extern crate ws2812_nop_samd21;
 
-use circuit_playground_express::clock::GenericClockController;
-use circuit_playground_express::{Peripherals, CorePeripherals};
-use circuit_playground_express::delay::Delay;
-use embedded_hal::blocking::delay::DelayMs;
+extern crate circuit_playground_express as hal;
+extern crate ws2812_nop_samd21 as ws2812;
 
-use ws2812_nop_samd21::Ws2812;
-use smart_leds_trait::SmartLedsWrite;
+use hal::clock::GenericClockController;
+use hal::delay::Delay;
+use hal::prelude::*;
+use hal::{CorePeripherals, Peripherals};
+
 use smart_leds_trait::Color;
+use smart_leds_trait::SmartLedsWrite;
+use ws2812::Ws2812;
 
 entry!(main);
 
 fn main() -> ! {
     let mut peripherals = Peripherals::take().unwrap();
-    let core = CorePeripherals::take().unwrap(); 
+    let core = CorePeripherals::take().unwrap();
     let mut clocks = GenericClockController::with_internal_32kosc(
         peripherals.GCLK,
         &mut peripherals.PM,
