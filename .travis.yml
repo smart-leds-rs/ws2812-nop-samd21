@@ -1,0 +1,9 @@
+language: rust
+rust:
+  - nightly
+cache: cargo
+matrix:
+  fast_finish: true
+script:
+  - rustup target add thumbv6m-none-eabi
+  - cargo build --examples --release
