@@ -18,13 +18,3 @@ cortex-m-rt = "0.5"
 cortex-m = "0.5"
 panic-halt = "0.2"
 smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}
-
-
-[features]
-# ask the HAL to enable atsamd21g18a support
-default = ["rt", "atsamd21-hal/samd21g18a"]
-rt = ["atsamd21-hal/samd21g18a-rt"]
-unproven = ["atsamd21-hal/unproven"]
-use_semihosting = []
-
-
