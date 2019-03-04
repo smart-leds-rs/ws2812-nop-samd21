@@ -1,8 +1,7 @@
 #![no_std]
 #![no_main]
 
-#[macro_use(entry)]
-extern crate cortex_m_rt;
+use cortex_m_rt::entry;
 extern crate cortex_m;
 
 extern crate panic_halt;
@@ -18,8 +17,7 @@ use smart_leds_trait::Color;
 use smart_leds_trait::SmartLedsWrite;
 use ws2812::Ws2812;
 
-entry!(main);
-
+#[entry]
 fn main() -> ! {
     let mut peripherals = Peripherals::take().unwrap();
 
