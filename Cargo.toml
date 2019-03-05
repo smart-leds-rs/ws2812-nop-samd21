@@ -5,15 +5,15 @@ authors = ["Paul Sajna <sajattack@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-smart-leds-trait = {git = "https://github.com/smart-leds-rs/smart-leds-trait"}
+smart-leds-trait = "~0.1" 
 cortex-m = "~0.5"
 
 [dependencies.embedded-hal]
 features = ["unproven"]
-version = "0.2.1"
+version = "~0.2"
 
 [dev-dependencies]
 circuit_playground_express = "~0.2"
 cortex-m-rt = "~0.6"
 panic-halt = "~0.2"
-smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}
+smart-leds = "~0.1"
