@@ -15,14 +15,13 @@ keywords = ["smart-leds", "ws2812", "driver", "atsamd"]
 
 [dependencies]
 smart-leds-trait = "~0.1" 
-cortex-m = "~0.5"
+cortex-m = "0.6.2"
 
 [dependencies.embedded-hal]
 features = ["unproven"]
 version = "~0.2"
 
 [dev-dependencies]
-circuit_playground_express = "~0.2"
-cortex-m-rt = "~0.6"
+circuit_playground_express = "~0.6"
 panic-halt = "~0.2"
 smart-leds = "~0.1"

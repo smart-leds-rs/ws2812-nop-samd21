@@ -1,8 +1,8 @@
 #![no_std]
-#![feature(asm)]
 
 use embedded_hal::digital::OutputPin;
 use smart_leds_trait::{Color, SmartLedsWrite};
+use cortex_m::asm::delay;
 
 pub struct Ws2812<P: OutputPin> {
     pin: P,
@@ -16,23 +16,17 @@ impl<P: OutputPin> Ws2812<P> {
         let mut bitmask: u8 = 0x80;
         while bitmask != 0 {
             self.pin.set_high();
-            unsafe {
-                asm!("nop; nop;");
-            }
+            delay(2);
             if data & bitmask != 0 {
-                unsafe { asm!("nop; nop; nop; nop; nop; nop; nop;") }
+                delay(7);
                 self.pin.set_low();
             } else {
                 self.pin.set_low();
-                unsafe {
-                    asm!("nop; nop;");
-                }
+                delay(2); 
             }
             bitmask >>= 1;
         }
-        unsafe {
-            asm!("nop; nop; nop; nop; nop;");
-        }
+        delay(5);
     }
 }
 
