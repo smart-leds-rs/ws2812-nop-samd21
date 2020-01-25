@@ -1,6 +1,6 @@
 [package]
 name = "ws2812-nop-samd21"
-version = "0.1.0"
+version = "0.3.0"
 authors = ["Paul Sajna <sajattack@gmail.com>"]
 edition = "2018"
 description = "Nop-based bitbanger for 48MHz SAMD21 devices"
@@ -14,14 +14,15 @@ categories = [
 keywords = ["smart-leds", "ws2812", "driver", "atsamd"]
 
 [dependencies]
-smart-leds-trait = "~0.1" 
-cortex-m = "0.6.2"
+cortex-m = "~0.6.2"
+cortex-m-rt = "~0.6.11"
+smart-leds-trait = "~0.2" 
 
 [dependencies.embedded-hal]
 features = ["unproven"]
-version = "~0.2"
+version = "~0.2.3"
 
 [dev-dependencies]
 circuit_playground_express = "~0.6"
 panic-halt = "~0.2"
-smart-leds = "~0.1"
+smart-leds = "~0.2"

@@ -3,7 +3,7 @@ Nop-based bitbanger for 48MHz samd21 devices. This is a direct port of Adafruit'
 
 It requires a nightly compiler to use `#![feature(asm)]`, so this crate only works on nightly rust.
 
-![cpx rainbow cycle](https://media.giphy.com/media/EPYzBKymtpVK2j6b4B/giphy.gif)
+![cpx rainbow cycle](https://github.com/smart-leds-rs/ws2812-nop-samd21/blob/master/cpx_rainbow.gif?raw=true)
 
 ## License
 

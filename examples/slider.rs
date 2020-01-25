@@ -12,10 +12,11 @@ extern crate ws2812_nop_samd21 as ws2812;
 use hal::clock::GenericClockController;
 use hal::delay::Delay;
 use hal::prelude::*;
-use hal::{CorePeripherals, Peripherals};
+use hal::pac::{CorePeripherals, Peripherals};
 
-use smart_leds_trait::Color;
-use smart_leds_trait::SmartLedsWrite;
+use smart_leds::SmartLedsWrite;
+use smart_leds::hsv::RGB8;
+
 use ws2812::Ws2812;
 
 #[entry]
@@ -37,7 +38,7 @@ fn main() -> ! {
     const MAX: usize = 10;
     const COLOR1: (u8, u8, u8) = (0x00, 0xc3 / 5, 0x36 / 5);
     const COLOR2: (u8, u8, u8) = (0x00, 0x24 / 5, 0xb0 / 5);
-    let mut data = [Color::default(); MAX];
+    let mut data = [RGB8::default(); MAX];
     let mut main = 0;
     let mut up = true;
 

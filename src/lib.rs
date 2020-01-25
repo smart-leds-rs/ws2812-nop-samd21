@@ -1,8 +1,8 @@
 #![no_std]
 
-use embedded_hal::digital::OutputPin;
-use smart_leds_trait::{Color, SmartLedsWrite};
 use cortex_m::asm::delay;
+use embedded_hal::digital::v2::OutputPin;
+use smart_leds_trait::{RGB8, SmartLedsWrite};
 
 pub struct Ws2812<P: OutputPin> {
     pin: P,
@@ -15,13 +15,13 @@ impl<P: OutputPin> Ws2812<P> {
     fn write_byte(&mut self, data: u8) {
         let mut bitmask: u8 = 0x80;
         while bitmask != 0 {
-            self.pin.set_high();
+            self.pin.set_high().unwrap_or(());
             delay(2);
             if data & bitmask != 0 {
                 delay(7);
-                self.pin.set_low();
+                self.pin.set_low().unwrap_or(());
             } else {
-                self.pin.set_low();
+                self.pin.set_low().unwrap_or(());
                 delay(2); 
             }
             bitmask >>= 1;
@@ -34,15 +34,18 @@ impl<P> SmartLedsWrite for Ws2812<P>
 where
     P: OutputPin,
 {
+    type Color = RGB8;
     type Error = ();
-    fn write<T>(&mut self, iterator: T) -> Result<(), ()>
+    fn write<T, I>(&mut self, iterator: T) -> Result<(), ()>
     where
-        T: Iterator<Item = Color>,
+        T: Iterator<Item = I>,
+        I: Into<Self::Color>
     {
         for item in iterator {
-            self.write_byte(item.g);
-            self.write_byte(item.r);
-            self.write_byte(item.b);
+            let color: Self::Color = item.into();
+            self.write_byte(color.g);
+            self.write_byte(color.r);
+            self.write_byte(color.b);
         }
         Ok(())
     }
